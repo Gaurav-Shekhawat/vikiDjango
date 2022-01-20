@@ -5,6 +5,7 @@ from django.template import RequestContext
 from django.urls import reverse
 import markdown
 import os
+import random
 
 from . import util
 
@@ -117,3 +118,11 @@ def editpage(request):
             })
     else:
         return HttpResponse("inside the else statement, you fucked up mister")
+
+
+def randomPage(request):
+    length = len(util.list_entries())
+    num = random.randint(0, length-1)
+    pagetitle = util.list_entries()[num]
+    return HttpResponseRedirect(f"wiki/{pagetitle}")
+
